@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>二次贝塞尔曲线</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    /** @type {HTMLCanvasElement} */
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.moveTo(200, 200);
+      cxt.quadraticCurveTo(400, 400, 300, 500);
+      cxt.stroke();
+
+      cxt.moveTo(75,25)
+      cxt.quadraticCurveTo(25,25,25,62)
+      cxt.quadraticCurveTo(25,100,50,100)
+      cxt.quadraticCurveTo(50,120,30,125)
+      cxt.quadraticCurveTo(60,120,65,100)
+      cxt.quadraticCurveTo(125,100,125,62)
+      cxt.quadraticCurveTo(125,25,75,25)
+      cxt.stroke()
+    };
+  </script>
+</html>

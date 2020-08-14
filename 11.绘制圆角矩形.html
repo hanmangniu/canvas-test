@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制圆角矩形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.moveTo(250, 200);
+      //(最大矩形点x,y,圆弧落点x,y,圆角大小)
+      cxt.arcTo(500, 200, 500, 250, 50);
+      cxt.arcTo(500, 400, 250, 400, 50);
+      cxt.arcTo(200, 400, 200, 350, 50);
+      cxt.arcTo(200, 200, 250, 200, 50);
+      cxt.stroke();
+      draw(cxt, 600, 200, 400, 200, 50);
+    };
+    //封装
+    /**
+    * x,y 矩形的左上角点
+    * width,height 矩形的长宽
+    * radius 圆角半径
+    */
+    function draw(cxt, x, y, width, height, radius) {
+      cxt.moveTo(x + radius, y);
+      cxt.arcTo(x + width, y, x + width, y + radius, radius);
+      cxt.arcTo(x + width, y + height, x + width - radius, y + height, radius);
+      cxt.arcTo(x, y + height, x, y + height - radius, radius);
+      cxt.arcTo(x, y, x + radius, y, radius);
+      cxt.stroke();
+    }
+  </script>
+</html>

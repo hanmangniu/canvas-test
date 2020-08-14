@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>阴影</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //设置阴影
+      // shadowOffsetX 默认0 正值在右 负值在左
+      cxt.shadowOffsetX = 10;
+      // shadowOffsetY 默认0 正值在下 负值在上
+      cxt.shadowOffsetY = 10;
+      //阴影颜色 默认黑色
+      cxt.shadowColor = "blue";
+      //阴影模糊值 默认0 值越大越模糊
+      cxt.shadowBlur = 10;
+      cxt.fillStyle = "pink";
+      cxt.fillRect(200, 200, 200, 150);
+      cxt.font = "48px Arial";
+      cxt.fillText("文字也能设置阴影", 600, 200);
+      //同理 图片也可以设置阴影
+    };
+  </script>
+</html>

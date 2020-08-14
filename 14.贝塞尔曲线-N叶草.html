@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>贝塞尔曲线-N叶草</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      draw(cxt, 4, 200, 200, 20, 80);
+      cxt.stroke();
+    };
+    /**
+     * n n片
+     * x,y 叶子中心位置
+     * size 叶子的大小
+     * length 叶子的长度
+     */
+    function draw(cxt, n, x, y, size, length) {
+      cxt.beginPath();
+      cxt.moveTo(x, y + size);
+      const degree = (2 * Math.PI) / n;
+      //i必须从1开始
+      for (let i = 1; i < n + 1; i++) {
+        //计算控制点
+        let cx1 = Math.sin((i - 1) * degree) * length + x;
+        let cy1 = Math.cos((i - 1) * degree) * length + y;
+        let cx2 = Math.sin(i * degree) * length + x;
+        let cy2 = Math.cos(i * degree) * length + y;
+        //计算结束点
+        let lx = Math.sin(i * degree) * size + x;
+        let ly = Math.cos(i * degree) * size + y;
+        cxt.bezierCurveTo(cx1, cy1, cx2, cy2, lx, ly);
+      }
+      cxt.closePath();
+    }
+  </script>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制箭头</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.moveTo(100, 150);
+      cxt.lineTo(100, 250);
+      cxt.lineTo(300, 250);
+      cxt.lineTo(300, 300);
+      cxt.lineTo(400, 200);
+      cxt.lineTo(300, 100);
+      cxt.lineTo(300, 150);
+      cxt.lineTo(100, 150);
+      cxt.stroke();
+    };
+  </script>
+</html>

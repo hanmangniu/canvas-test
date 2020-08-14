@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制矩形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //描边矩形
+      cxt.strokeStyle = "pink";
+      cxt.strokeRect(50, 100, 60, 40);
+      //填充矩形
+      cxt.fillStyle = "pink";
+      cxt.fillRect(200, 100, 60, 40);
+      //描边矩形和填充矩形重叠
+      cxt.strokeStyle = "#444";
+      cxt.strokeRect(400, 100, 60, 40);
+      cxt.fillStyle = "pink";
+      cxt.fillRect(400, 100, 60, 40);
+      //两个填充矩形重叠 ()
+      cxt.fillStyle = "green";
+      cxt.fillRect(580, 80, 60, 40);
+      cxt.fillStyle = "yellow";
+      cxt.fillRect(600, 100, 60, 40);
+      cxt.fillStyle = "rgba(0,0,255,0.3)";
+      cxt.fillRect(620, 120, 60, 40);
+      //rect方法绘制矩形
+      cxt.rect(50, 180, 60, 40);
+      cxt.rect(200, 180, 60, 40);
+      cxt.stroke();
+      //该方法会影响到前面的填充矩形 可以注释看效果
+      cxt.rect(400, 100, 60, 40);
+      cxt.fill();
+    };
+  </script>
+</html>

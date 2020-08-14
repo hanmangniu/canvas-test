@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>线条样式</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      const degree = 0.33 * 360 * (Math.PI / 180);
+      cxt.beginPath();
+      //定义线条的宽度
+      cxt.lineWidth = 10;
+      cxt.moveTo(200, 200);
+      cxt.lineTo(300, 200);
+      cxt.arc(200, 200, 100, 0, degree, false);
+      cxt.closePath();
+      cxt.stroke();
+
+      //第二个线条
+      //canvas每一次绘制 stroke()和fill()都会检测整个代码定义的状态 在同一路径下状态会被一直使用 beginPath()就是开始一个新的路径
+      cxt.beginPath();
+      cxt.lineWidth = 20;
+      cxt.moveTo(400, 200);
+      cxt.lineTo(500, 200);
+      cxt.arc(400, 200, 100, 0, degree, false);
+      cxt.closePath();
+      cxt.stroke();
+
+      cxt.beginPath();
+      cxt.lineWidth = 10;
+      //定义线条的线帽 线帽是在线的长度上添加 butt:默认值 round:半圆形线帽 square:长方形线帽,长方形长度为线宽的一半
+      cxt.lineCap = "round";
+      //   cxt.lineCap = "square";
+      cxt.moveTo(600, 200);
+      cxt.lineTo(700, 200);
+      cxt.stroke();
+
+      cxt.beginPath();
+      cxt.lineWidth = 20;
+      //定义线条交接处样式 miter:默认值,尖角 round:圆角,圆直径等于线宽 bevel:斜角,斜角所在正方形的对角线长等于线宽
+      cxt.lineJoin = "round";
+      //   cxt.lineJoin = "bevel";
+      cxt.moveTo(800, 200);
+      cxt.lineTo(900, 200);
+      cxt.arc(800, 200, 100, 0, degree, false);
+      cxt.closePath();
+      cxt.stroke();
+
+      cxt.beginPath();
+      cxt.lineWidth = 1;
+      cxt.lineCap = "butt";
+      //定义线的虚实 array[index] 按顺序 实线->空白->实线循环   特别注意!!IE浏览器不支持
+      cxt.setLineDash([10, 5]);
+      cxt.moveTo(1000, 200);
+      cxt.lineTo(1100, 200);
+      cxt.stroke();
+    };
+  </script>
+</html>

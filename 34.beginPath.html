@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>beginPath</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+
+      //beginPath()
+      cxt.lineWidth = 5;
+
+      //这里画三条线 不使用beginPath()
+      //可以发现 strokeStyle只生效了最后一次数据
+      //不同路径使用不同的值 相同路径 后面的值会覆盖前面的值
+      cxt.moveTo(100, 200);
+      cxt.lineTo(200, 200);
+      cxt.strokeStyle = "red";
+      cxt.stroke();
+      cxt.moveTo(100, 300);
+      cxt.lineTo(200, 300);
+      cxt.strokeStyle = "green";
+      cxt.stroke();
+      cxt.moveTo(100, 400);
+      cxt.lineTo(200, 400);
+      cxt.strokeStyle = "blue";
+      cxt.stroke();
+      //再画三条线 使用benginPath()
+      //可以发现 每条线都生效了各自的设置值
+      cxt.beginPath();
+      cxt.moveTo(250, 200);
+      cxt.lineTo(350, 200);
+      cxt.strokeStyle = "red";
+      cxt.stroke();
+      cxt.beginPath();
+      cxt.moveTo(250, 300);
+      cxt.lineTo(350, 300);
+      cxt.strokeStyle = "green";
+      cxt.stroke();
+      cxt.beginPath();
+      cxt.moveTo(250, 400);
+      cxt.lineTo(350, 400);
+      cxt.strokeStyle = "blue";
+      cxt.stroke();
+    };
+  </script>
+</html>

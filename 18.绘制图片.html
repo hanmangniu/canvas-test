@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制图片</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //创建Image对象 并指定src
+      let image = new Image();
+      image.src = "./images/image01.jpg";
+      //必须在图片加载完成后调用 否则canvas不会绘制图片
+      image.onload = function () {
+        //drawImage(image,dx,dy) 图片,左上角x,左上角y
+        // cxt.drawImage(image, 20, 20);
+        //drawImage(image,dx,dy,dw,dh) 图片,左上角x,左上角y,图片宽度,图片高度
+        // cxt.drawImage(image, 20, 20, 800, 480);
+        //drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh) 图片,被裁切图片左上角距离原图片左上角x,y,被裁切图片宽,被裁切图片高,左上角x,左上角y,图片宽度,图片高度
+        cxt.drawImage(image, 1360, 140, 700, 420, 20, 20, 800, 480);
+      };
+    };
+  </script>
+</html>

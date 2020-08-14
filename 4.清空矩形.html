@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>清空矩形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="清空canvas" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.fillStyle = "pink";
+      cxt.fillRect(200, 100, 300, 200);
+      cxt.clearRect(300, 150, 100, 100);
+      //实现点击清空canvas
+      const btn = document.getElementById("btn");
+      btn.onclick = function () {
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+      };
+    };
+  </script>
+</html>

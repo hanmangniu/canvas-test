@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制弧线</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //使用arc绘制弧线
+      //弧线不需要用closePath闭合路径
+      cxt.beginPath();
+      cxt.arc(200, 200, 100, 0, 90 * (Math.PI / 180), true);
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+      cxt.beginPath();
+      cxt.arc(200, 200, 100, 0, 90 * (Math.PI / 180), false);
+      cxt.closePath();
+      cxt.strokeStyle = "red";
+      cxt.stroke();
+      //使用arcTo绘制弧线
+      cxt.moveTo(400,200)
+      cxt.arcTo(500,200,500,300,100)
+      cxt.stroke()
+    };
+  </script>
+</html>

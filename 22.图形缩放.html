@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图形缩放</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="缩放" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //绘制一个矩形
+      cxt.strokeStyle = "pink";
+      cxt.strokeRect(20, 20, 120, 80);
+
+      const btn = document.getElementById("btn");
+      btn.onclick = function () {
+        //清空画布 如果不清空画布的话会保留之前的绘制的图形
+        // cxt.clearRect(0, 0, cnv.width, cnv.height);
+        //缩放矩形 缩放不仅仅只是缩放图形本身宽高 还会影响其他属性 线条宽度、左上角坐标
+        cxt.scale(2, 2);
+        //重绘矩形 仍然是最开始绘制的矩形的数据
+        cxt.strokeRect(20, 20, 120, 80);
+      };
+    };
+  </script>
+</html>

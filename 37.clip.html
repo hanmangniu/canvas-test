@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>clip</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //先绘制一个图形
+      cxt.beginPath();
+      cxt.arc(200, 200, 100, 0, Math.PI * 2, true);
+      cxt.closePath();
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+      //使用clip() 使绘制的图形成为剪切区域
+      cxt.clip();
+      //绘制一个填充图形 如果范围超过剪切区域 即不可见
+      cxt.beginPath();
+      cxt.rect(200, 200, 100, 100);
+      cxt.fillStyle = "blue";
+      cxt.fill();
+    };
+  </script>
+</html>

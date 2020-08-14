@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制正多边形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      createPolygon(cxt, 3, 200, 150, 100);
+      cxt.stroke();
+      //   cxt.fill();
+    };
+    /**
+     * cxt: 上下文环境对象
+     * n: n边形
+     * dx,dy: n边形中心坐标
+     * size: n边形大小
+     */
+    function createPolygon(cxt, n, dx, dy, size) {
+      //开始路径
+      cxt.beginPath();
+      //角度
+      const degree = (2 * Math.PI) / n;
+      for (let i = 0; i < n; i++) {
+        let x = Math.cos(i * degree);
+        let y = Math.sin(i * degree);
+        cxt.lineTo(x * size + dx, y * size + dy);
+      }
+      //关闭路径
+      cxt.closePath();
+    }
+  </script>
+</html>

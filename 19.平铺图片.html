@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>平铺图片</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //创建Image对象 并指定src
+      let image = new Image();
+      image.src = "./images/image02.jpg";
+      //必须在图片加载完成后调用 否则canvas不会绘制图片
+      image.onload = function () {
+        //createPattern和fillRect配合使用才能实现平铺  createPattern(image,平铺方式)
+        //repeat 默认值 在水平方向和垂直方向同时平铺
+        let pattern = cxt.createPattern(image, "repeat");
+        //repeat-x 在水平方向平铺
+        // let pattern = cxt.createPattern(image, "repeat-x");
+        //repeat-y 在水平方向平铺
+        // let pattern = cxt.createPattern(image, "repeat-y");
+        //no-repeat 只显示一次 不平铺
+        // let pattern = cxt.createPattern(image, "no-repeat");
+        cxt.fillStyle = pattern;
+        cxt.fillRect(0, 0, 840, 500);
+        // cxt.fillText('图片也能结合文字',500,300)
+      };
+    };
+  </script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制圆形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //每次画圆都需要绘制路径 
+      cxt.beginPath();
+      //arc(x,y,半径,起始角度,结束角度,方向)
+      cxt.arc(100, 100, 60, 0, 360 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+      cxt.beginPath();
+      cxt.arc(100, 200, 60, 180 * (Math.PI / 180), 360 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.stroke();
+      //第五个参数 true逆时针画 false顺时针画
+      cxt.beginPath();
+      cxt.arc(300, 100, 60, 0 * (Math.PI / 180), 90 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.stroke();
+      cxt.beginPath();
+      cxt.arc(300, 200, 60, 0 * (Math.PI / 180), 90 * (Math.PI / 180), false);
+      cxt.closePath();
+      cxt.stroke();
+
+      //同理 可以绘制 填充圆
+      cxt.beginPath();
+      cxt.arc(500, 100, 60, 0, 360 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.fillStyle = "pink";
+      cxt.fill();
+      cxt.beginPath();
+      cxt.arc(500, 200, 60, 180 * (Math.PI / 180), 360 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.fill();
+      cxt.beginPath();
+      cxt.arc(700, 100, 60, 0 * (Math.PI / 180), 90 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.fill();
+      cxt.beginPath();
+      cxt.arc(700, 200, 60, 0 * (Math.PI / 180), 90 * (Math.PI / 180), false);
+      cxt.closePath();
+      cxt.fill();
+    };
+  </script>
+</html>

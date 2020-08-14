@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>isPointInPath</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+
+      cxt.strokeStyle = "pink";
+      cxt.rect(100, 100, 200, 150);
+      cxt.stroke();
+      //可以判断该点是否在矩形当中
+      if (cxt.isPointInPath(150, 150)) {
+        console.log("点在路径上");
+      } else {
+        console.log("点不在路径上");
+      }
+    };
+  </script>
+</html>

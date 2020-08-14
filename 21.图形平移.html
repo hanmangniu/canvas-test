@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图形平移</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="移动" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //绘制一个矩形
+      cxt.fillStyle = "pink";
+      cxt.fillRect(20, 20, 120, 80);
+
+      const btn = document.getElementById("btn");
+      btn.onclick = function () {
+        //清空画布 如果不清空画布的话会保留之前的绘制的图形
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        //移动矩形
+        cxt.translate(50, 50);
+        //重绘矩形 仍然是最开始绘制的矩形的数据
+        cxt.fillRect(20, 20, 120, 80);
+      };
+    };
+  </script>
+</html>

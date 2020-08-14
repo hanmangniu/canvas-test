@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>透明处理</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      let image = new Image();
+      image.src = "./images/image02.jpg";
+
+      image.onload = function () {
+        //绘制原图
+        cxt.drawImage(image, 50, 50);
+        //getImageData(x,y,width,height) 获取一张图片的像素数据 返回一个canvasPixelArray对象
+        let imageData = cxt.getImageData(50, 50, 80, 80);
+        //canvasPixelArray里有一个data属性 保存了图片的像素数据 取值为[r1,g1,b1,a1,r2,g2,b2,a2...] 4个数代表一个像素对应rgba
+        let data = imageData.data;
+        //透明处理 实现方式 将透明度*一个值
+        for (let i = 0; i < data.length; i += 4) {
+          let transparency = 0.5;
+          data[i + 3] = data[i + 3] * transparency;
+        }
+        //是否保留原图片
+        // cxt.clearRect(0,0,cnv.width,cnv.height)
+        //在指定位置输出图片
+        cxt.putImageData(imageData, 150, 50);
+      };
+    };
+  </script>
+</html>

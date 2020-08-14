@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图形旋转</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="旋转" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //绘制一个矩形
+      cxt.strokeStyle = "pink";
+      cxt.strokeRect(200, 200, 120, 80);
+
+      const btn = document.getElementById("btn");
+      const degree = 15 * (Math.PI / 180);
+      //暂时只能第一次正常旋转 后续还得学习新的知识再来完善
+      btn.onclick = function () {
+        //清空画布 如果不清空画布的话会保留之前的绘制的图形
+        // cxt.clearRect(0, 0, cnv.width, cnv.height);
+        //旋转矩形 默认的旋转中心坐标为(0,0)
+        //实现旋转中心移动 先移动图形(图形左上角x+图形宽度/2,图形左上角y+图形高度/2) 然后重绘时移回原处
+        cxt.translate(260, 240);
+        cxt.rotate(degree);
+        //重绘矩形 重绘(-图形宽度/2,-图形高度/2,图形宽度,图形高度)
+        cxt.strokeRect(-60, -40, 120, 80);
+      };
+    };
+  </script>
+</html>

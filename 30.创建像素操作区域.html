@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>创建像素操作区域</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      let image = new Image();
+      image.src = "./images/image02.jpg";
+
+      image.onload = function () {
+        //绘制原图
+        cxt.drawImage(image, 50, 50);
+        //getImageData(x,y,width,height) 获取一张图片的像素数据 返回一个canvasPixelArray对象
+        let imageData = cxt.getImageData(50, 50, 80, 80);
+        //createImageData()有两种使用方式
+        //createImageData(imgaData) 该方法只是创建区域宽高 不附带原图片像素数据
+        let createData = cxt.createImageData(imageData);
+        let data = createData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          data[i] = 255;
+          data[i + 1] = 255;
+          data[i + 2] = 0;
+          data[i + 3] = 255;
+        }
+        //createImageData(width,height)
+        // let createData = cxt.createImageData(80, 80);
+        // let data = createData.data;
+        // for (let i = 0; i < 80 * 80 * 4; i += 4) {
+        //   data[i] = 255;
+        //   data[i + 1] = 255;
+        //   data[i + 2] = 0;
+        //   data[i + 3] = 255;
+        // }
+        cxt.putImageData(createData, 150, 50);
+      };
+    };
+  </script>
+</html>

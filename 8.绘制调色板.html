@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制调色板</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //方形调色板
+      for (let i = 0; i < 15; i++) {
+        for (let j = 0; j < 15; j++) {
+          cxt.fillStyle = "rgba(" + Math.floor(255 - 15 * i) + "," + Math.floor(255 - 15 * j) + ",0)";
+          cxt.fillRect(i * 30, j * 30, 30, 30);
+        }
+      }
+      //渐变调色板
+      let r = 255,
+        g = 0,
+        b = 0;
+      for (let i = 0; i < 153; i++) {
+        if (i < 51) {
+          r = r - 5;
+          g = g + 5;
+        } else if (i < 102) {
+          g = g - 5;
+          b = b + 5;
+        } else {
+          r = r + 5;
+          b = b - 5;
+        }
+        cxt.fillStyle = "rgba(" + r + "," + g + "," + b + ")";
+        cxt.fillRect(3 * i + 600, 0, 3, 450);
+      }
+    };
+  </script>
+</html>

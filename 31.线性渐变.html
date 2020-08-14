@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>线性渐变</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //createLinearGradient(x1,y1,x2,y2) x1=x2时横向渐变/y1=y2时纵向渐变
+      let gnt = cxt.createLinearGradient(200, 200, 400, 200);
+      //addColorStop(value,color) value取值 0~1 多次调用代表多个渐变 顺序不重要
+      gnt.addColorStop(0, "hotPink");
+      gnt.addColorStop(0.5, "pink");
+      gnt.addColorStop(1, "white");
+      cxt.fillStyle = gnt;
+      cxt.fillRect(200, 200, 200, 150);
+      cxt.font = "bold 32px 微软雅黑";
+      cxt.fillText("文字也能渐变", 200, 200);
+    };
+  </script>
+</html>

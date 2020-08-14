@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>closePath</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+
+      cxt.lineWidth = 5;
+      //不使用closePath()
+      cxt.beginPath();
+      cxt.moveTo(100, 200);
+      cxt.lineTo(200, 200);
+      cxt.lineTo(200, 300);
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+      //使用closePath()
+      cxt.beginPath();
+      cxt.moveTo(100, 350);
+      cxt.lineTo(200, 350);
+      cxt.lineTo(200, 450);
+      //关闭路径 使其成为一个闭合图形
+      cxt.closePath();
+      cxt.strokeStyle = "blue";
+      cxt.stroke();
+
+      //不使用closePath()
+      cxt.beginPath();
+      cxt.moveTo(250, 200);
+      cxt.lineTo(350, 200);
+      cxt.lineTo(350, 300);
+      //使用closePath() 特别注意 closePath()并不能重新开始一条路径 重新开始路径只有beginPath()
+      cxt.closePath();
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+      cxt.moveTo(250, 350);
+      cxt.lineTo(350, 350);
+      cxt.lineTo(350, 450);
+      cxt.strokeStyle = "blue";
+      cxt.stroke();
+
+      //额外试验
+      cxt.beginPath();
+      cxt.moveTo(500, 200);
+      cxt.lineTo(600, 200);
+      cxt.moveTo(650, 200);
+      cxt.lineTo(650, 300);
+      //这个closePath()不生效
+      cxt.closePath();
+      cxt.strokeStyle = "pink";
+      cxt.stroke();
+    };
+  </script>
+</html>

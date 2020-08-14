@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制直线</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="200" height="160" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.moveTo(50, 100);
+      cxt.lineTo(150, 50);
+      cxt.lineTo(100, 50);
+      cxt.lineTo(50, 100);
+      cxt.stroke();
+    };
+  </script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>径向渐变</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //绘制一个图形
+      cxt.beginPath();
+      cxt.arc(200, 200, 100, 0, Math.PI * 2, true);
+      cxt.closePath();
+      //createRadialGradient(x1,y1,r1,x2,y2,r2) x,y圆心 r半径
+      let gnt = cxt.createRadialGradient(220, 220, 10, 200, 200, 100);
+      //addColorStop(value,color) value取值 0~1 多次调用代表多个渐变 顺序不重要
+      gnt.addColorStop(0, "white");
+      gnt.addColorStop(0.9, "hotPink");
+      //可以画出阴影效果
+      gnt.addColorStop(1, "rgba(0,0,0,0)");
+      cxt.fillStyle = gnt;
+      cxt.fill();
+    };
+  </script>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制扇形</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      craw(cxt, 200, 200, 80, 0.33);
+    };
+    /**
+     * x,y 圆心
+     * size 半径
+     */
+    function craw(cxt, x, y, size, ratio) {
+      const degree = ratio * 360 * (Math.PI / 180);
+      cxt.beginPath();
+      cxt.moveTo(x, y);
+      cxt.lineTo(x + size, y);
+      cxt.arc(x, y, size, 0, degree, false);
+      //   cxt.lineTo(x,y)
+      cxt.closePath();
+      cxt.stroke();
+    }
+  </script>
+</html>

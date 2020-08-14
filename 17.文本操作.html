@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文本操作</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      cxt.font = "bolder 40px 微软雅黑";
+      //文本操作-方法
+      //strokeText/fillText(内容,x,y,maxWidth)  x,y坐标为文本左下角坐标 maxWidth非必填
+      cxt.strokeText("文本操作-strokeText", 200, 100, 200);
+      cxt.strokeText("文本操作-strokeText", 200, 200);
+      cxt.fillText("文本操作-fillText", 800, 100, 200);
+      cxt.fillText("文本操作-fillText", 800, 200);
+      //根据文本属性获取文本的长度 measText(文本).width 不被maxWidth值限制
+      console.log(cxt.measureText("文本操作-strokeText").width);
+      //文本长度通常使用在文本居中
+      let text = "获取文本长度用于文本居中";
+      let textWidth = cxt.measureText(text).width;
+      let canvasWidth = cnv.width;
+      cxt.strokeText(text, (canvasWidth - textWidth) / 2, 300);
+
+      //文本操作-属性 font属性在定义以后会一直沿用 直到被重新定义
+      //font = "font-style, font-weight, font-size/line-height,font-family"
+      cxt.font = "bold 30px 微软雅黑";
+      cxt.strokeText("重新定义了font属性", 200, 400);
+
+      //textAlign = "属性"   start/end/left/right/center
+      cxt.moveTo(600, 400);
+      cxt.lineTo(600, 600);
+      cxt.stroke();
+      cxt.font = "16px Arial";
+      cxt.textAlign = "start";
+      cxt.fillText("textAlign-start", 600, 450);
+      cxt.textAlign = "end";
+      cxt.fillText("textAlign-end", 600, 480);
+      cxt.textAlign = "left";
+      cxt.fillText("textAlign-left", 600, 510);
+      cxt.textAlign = "right";
+      cxt.fillText("textAlign-right", 600, 540);
+      cxt.textAlign = "center";
+      cxt.fillText("textAlign-center", 600, 570);
+
+      //textBaseline = "属性"   alphabetic/top/middle/bottom
+      cxt.moveTo(1000, 500);
+      cxt.lineTo(1400, 500);
+      cxt.stroke();
+      cxt.textBaseline = "alphabetic";
+      cxt.fillText("alphabetic", 1000, 500);
+      cxt.textBaseline = "top";
+      cxt.fillText("top", 1100, 500);
+      cxt.textBaseline = "middle";
+      cxt.fillText("middle", 1200, 500);
+      cxt.textBaseline = "bottom";
+      cxt.fillText("bottom", 1400, 500);
+    };
+  </script>
+</html>

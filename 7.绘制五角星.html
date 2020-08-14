@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>绘制五角星</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      createPolygon(cxt, 5, 200, 150, 50, 100);
+      cxt.stroke();
+    };
+    /**
+     * cxt: 上下文环境对象
+     * n: n边形
+     * dx,dy: n边形中心坐标
+     * min: n边形内圈大小
+     * max: n边形外圈大小
+     */
+    function createPolygon(cxt, n, dx, dy, min, max) {
+      //开始路径
+      cxt.beginPath();
+      //角度
+      const degree = (2 * Math.PI) / n;
+      for (let i = 0; i < n; i++) {
+        let x1 = Math.cos(i * degree);
+        let y1 = Math.sin(i * degree);
+        cxt.lineTo(x1 * max + dx, y1 * max + dy);
+        let x2 = Math.cos(i * degree + degree / 2);
+        let y2 = Math.sin(i * degree + degree / 2);
+        cxt.lineTo(x2 * min + dx, y2 * min + dy);
+      }
+      //关闭路径
+      cxt.closePath();
+    }
+  </script>
+</html>
