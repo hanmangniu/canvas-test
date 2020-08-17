@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>canvas对象方法</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="保存成图片" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      //canvas对象方法有 cnv.getContext("2d") cnv.toDatURL()
+      let cxt = cnv.getContext("2d");
+      //定义一段文字
+      let text = "canvas对象方法";
+      cxt.font = "60px 微软雅黑";
+      //定义阴影
+      cxt.shadowOffsetX = 10;
+      cxt.shadowOffsetY = 10;
+      cxt.shadowColor = "hotPink";
+      cxt.shadowBlur = 15;
+      //填充文字
+      cxt.fillStyle = "pink";
+      cxt.fillText(text, 100, 100);
+
+      document.getElementById("btn").onclick = function () {
+        //在chrome下不行 chrome为了防止页面钓鱼禁止了这种方式
+        window.location = cnv.toDataURL("image/png");
+      };
+    };
+  </script>
+</html>

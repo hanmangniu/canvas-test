@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>三次贝塞尔曲线</title>
+    <title>save和restore-02</title>
   </head>
   <body>
     <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
@@ -13,14 +13,16 @@
       /** @type {HTMLCanvasElement} */
       const cnv = document.getElementById("canvas");
       let cxt = cnv.getContext("2d");
-      cxt.moveTo(75, 40);
-      cxt.bezierCurveTo(75, 37, 70, 25, 50, 25);
-      cxt.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
-      cxt.bezierCurveTo(20, 80, 40, 102, 75, 120);
-      cxt.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
-      cxt.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
-      cxt.bezierCurveTo(85, 25, 75, 37, 75, 40);
-      cxt.stroke();
+      //save()保存当前状态 restore()恢复之前保存的状态
+      //这里保存了空状态
+      cxt.save();
+      cxt.fillStyle = "HotPink";
+      cxt.translate(50, 50);
+      cxt.fillRect(100, 100, 100, 60);
+      cxt.restore();
+      cxt.fillStyle = "pink";
+      cxt.translate(100, 100);
+      cxt.fillRect(100, 100, 100, 60);
     };
   </script>
 </html>

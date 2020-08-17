@@ -3,17 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>获取canvas宽高</title>
+    <title>鼠标事件</title>
   </head>
   <body>
-    <canvas id="canvas" width="200" height="160" style="border: 1px dashed #444;"></canvas>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
   </body>
   <script type="text/javascript">
     window.onload = function () {
       /** @type {HTMLCanvasElement} */
       const cnv = document.getElementById("canvas");
-      let str = "Canvas的宽度为" + cnv.width + ",高度为" + cnv.height;
-      alert(str);
+      let cxt = cnv.getContext("2d");
     };
   </script>
 </html>

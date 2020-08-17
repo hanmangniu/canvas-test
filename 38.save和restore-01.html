@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>save和restore-01</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="绘制新图" />
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //save()保存当前状态 restore()恢复之前保存的状态
+      //这里保存了空状态
+      cxt.save();
+      //指定一个圆形的剪切区域
+      cxt.beginPath();
+      cxt.arc(200, 200, 100, 0, 360 * (Math.PI / 180), true);
+      cxt.closePath();
+      cxt.stroke();
+      cxt.clip();
+      //绘制一张图片
+      let image = new Image();
+      image.src = "./images/image02.jpg";
+      image.onload = function () {
+        cxt.drawImage(image, 100, 100, 200, 200);
+      };
+      document.getElementById("btn").onclick = function () {
+        //所以这里还原了空状态 没有剪切区域
+        cxt.restore();
+        //清空画布
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        //绘制一张新图片
+        let image = new Image();
+        image.src = "./images/image01.jpg";
+        image.onload = function () {
+          cxt.drawImage(image, 100, 100, 200, 200);
+        };
+      };
+    };
+  </script>
+</html>

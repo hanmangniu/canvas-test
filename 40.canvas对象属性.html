@@ -3,24 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>清空矩形</title>
+    <title>canvas对象属性</title>
   </head>
   <body>
-    <canvas id="canvas" width="800" height="400" style="border: 1px dashed #444;"></canvas>
-    <input type="button" id="btn" value="清空canvas" />
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <input type="button" id="btn" value="移动" />
   </body>
   <script type="text/javascript">
     window.onload = function () {
       /** @type {HTMLCanvasElement} */
       const cnv = document.getElementById("canvas");
+      //canvas对象有 cnv.width cnv.height
       let cxt = cnv.getContext("2d");
+      //绘制一个图形
       cxt.fillStyle = "pink";
-      cxt.fillRect(200, 100, 300, 200);
-      cxt.clearRect(300, 150, 100, 100);
-      //实现点击清空canvas
-      const btn = document.getElementById("btn");
-      btn.onclick = function () {
+      cxt.fillRect(100, 100, 100, 60);
+      document.getElementById("btn").onclick = function () {
         cxt.clearRect(0, 0, cnv.width, cnv.height);
+        cxt.translate(10, 10);
+        cxt.fillStyle = "pink";
+        cxt.fillRect(100, 100, 100, 60);
       };
     };
   </script>

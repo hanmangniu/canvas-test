@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>globalCompositeOperation属性</title>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      // globalCompositeOperation 交叉图形的显示方式
+      //source-over 默认值 新图覆盖旧图
+      //   cxt.globalCompositeOperation = "source-over";
+      //source-out 显示新图形与旧图形不重叠部分 其余部分透明
+      //   cxt.globalCompositeOperation = "source-out";
+      //copy 只显示新图形 旧图形做透明处理
+      //   cxt.globalCompositeOperation = "copy";
+      // destination-atop 显示旧图形与新图形相交部分(旧图形在上) 加上新图形其余部分
+      //   cxt.globalCompositeOperation = "destination-atop";
+      //destination-over 旧图形覆盖新图形
+      //   cxt.globalCompositeOperation = "destination-over";
+      //lighter 新旧图形重叠部分颜色值相加展示
+      //   cxt.globalCompositeOperation = "lighter";
+      //xor 新旧图形重叠部分透明展示
+      //   cxt.globalCompositeOperation = "xor";
+      cxt.fillStyle = "pink";
+      cxt.fillRect(200, 200, 100, 100);
+      cxt.fillStyle = "blue";
+      cxt.beginPath();
+      cxt.arc(320, 320, 60, 0, Math.PI * 2, true);
+      cxt.closePath();
+      cxt.fill();
+    };
+  </script>
+</html>

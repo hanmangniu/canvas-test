@@ -3,15 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>save和restore</title>
+    <title>globalAlpha属性</title>
   </head>
   <body>
     <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
   </body>
   <script type="text/javascript">
     window.onload = function () {
+      /** @type {HTMLCanvasElement} */
       const cnv = document.getElementById("canvas");
       let cxt = cnv.getContext("2d");
+      // globalAlpha 全局透明度
+      cxt.globalAlpha = 0.6;
+      let text = "全局透明度";
+      cxt.font = "30px 微软雅黑";
+      cxt.fillStyle = "pink";
+      cxt.fillText(text, 200, 200);
+      cxt.fillRect(200, 220, 200, 60);
     };
   </script>
 </html>
