@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>循环事件</title>
+    <script src="./utils/tools.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //初始化一个变量 这里是圆形的x轴坐标
+      let x = 0;
+      //1向右 0向左
+      let direction = 1;
+      //动画循环
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        //每次动画循环需要先清空画布 再绘制新图形
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+
+        //绘制圆形
+        cxt.beginPath();
+        cxt.arc(x, 200, 80, 0, (360 * Math.PI) / 180, true);
+        cxt.closePath();
+        cxt.fillStyle = "pink";
+        cxt.fill();
+
+        //每帧动画 变量变化
+        if (direction) {
+          x += 2;
+        } else {
+          x -= 2;
+        }
+        if (x > 1600) {
+          direction = 0;
+        } else if (x < 0) {
+          direction = 1;
+        }
+      })();
+    };
+  </script>
+</html>

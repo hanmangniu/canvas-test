@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>键盘事件</title>
+    <script src="./utils/tools.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      //定义绘制小球的函数
+      function drawBall(x, y) {
+        cxt.beginPath();
+        cxt.arc(x, y, 20, 0, (360 * Math.PI) / 180, true);
+        cxt.closePath();
+        cxt.fillStyle = "pink";
+        cxt.fill();
+      }
+      //初始化一个圆形
+      drawBall(cnv.width / 2, cnv.height / 2);
+      let x = cnv.width / 2;
+      let y = cnv.height / 2;
+      //获取按键方向
+      let key = tools.getKey();
+      //键盘事件分为2种 1:键盘按下 keydown ;2:键盘松开 keyup
+      //canvas标签本身不支持键盘事件 所以一般是通过window对象实现键盘的监听
+      window.addEventListener(
+        "keydown",
+        function (e) {
+          //清除canvas 重新绘制圆形
+          cxt.clearRect(0, 0, cnv.width, cnv.height);
+          //根据key.direction的值 判断小球移动方向
+          switch (key.direction) {
+            case "up":
+              y -= 5;
+              drawBall(x, y);
+              break;
+            case "down":
+              y += 5;
+              drawBall(x, y);
+              break;
+            case "left":
+              x -= 5;
+              drawBall(x, y);
+              break;
+            case "right":
+              x += 5;
+              drawBall(x, y);
+              break;
+            //default 这里如果不加上default
+            default:
+              drawBall(x, y);
+          }
+        },
+        false
+      );
+    };
+  </script>
+</html>

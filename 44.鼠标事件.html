@@ -4,15 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>鼠标事件</title>
+    <script src="./utils/tools.js"></script>
   </head>
   <body>
     <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <p id="txt"></p>
   </body>
   <script type="text/javascript">
     window.onload = function () {
       /** @type {HTMLCanvasElement} */
       const cnv = document.getElementById("canvas");
       let cxt = cnv.getContext("2d");
+      let txt = document.getElementById("txt");
+      let mouse = tools.getMouse(cnv);
+      //鼠标事件分为三种 1:鼠标按下 mousedown ;2:鼠标松开 mouseup ;3:鼠标移动 mousemove
+      cnv.addEventListener(
+        "mousemove",
+        function () {
+          txt.innerHTML = `鼠标当前坐标为:(${mouse.x},${mouse.y})`;
+        },
+        false
+      );
     };
   </script>
 </html>
