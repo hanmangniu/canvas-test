@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>圆周运动</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      let ball1 = new Ball(400, 250);
+      let ball2 = new Ball(1200, 250);
+      const centerX1 = cnv.width / 2 - 200;
+      const centerX2 = cnv.width / 2 + 200;
+      const centerY = cnv.height / 2;
+      //正圆半径
+      const radius = 50;
+      //椭圆X轴半径;Y轴半径
+      const radiusX = 60;
+      const radiusY = 40;
+      let angle = 0;
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        //绘制正圆轨迹
+        cxt.beginPath();
+        cxt.arc(centerX1, centerY, radius, 0, (360 * Math.PI) / 180, false);
+        cxt.closePath();
+        cxt.strokeStyle = "pink";
+        cxt.stroke();
+        cxt.beginPath();
+        cxt.arc(centerX2, centerY, radius, 0, (360 * Math.PI) / 180, false);
+        cxt.closePath();
+        cxt.strokeStyle = "pink";
+        cxt.stroke();
+        cxt.restore();
+        //计算小球1坐标 围绕正圆轨迹
+        ball1.x = centerX1 + Math.cos(angle) * radius;
+        ball1.y = centerY + Math.sin(angle) * radius;
+        ball1.fill(cxt);
+
+        //计算小球2坐标 椭圆轨迹
+        ball2.x = centerX2 + Math.cos(angle) * radiusX;
+        ball2.y = centerY + Math.sin(angle) * radiusY;
+        ball2.fill(cxt);
+        //角度递增
+        angle += Math.PI / 180;
+      })();
+    };
+  </script>
+</html>

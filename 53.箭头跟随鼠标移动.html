@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>箭头跟随鼠标移动</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/arrow.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      //实例化一个箭头
+      let arrow = new Arrow(cnv.width / 2, cnv.height / 2, "pink", 0);
+      //获取鼠标坐标
+      let mouse = tools.getMouse(cnv);
+      //箭头移动速度
+      const speed = 2;
+      let angle = 0;
+      (function drawFrame() {
+        window.requestAnimationFrame(drawFrame, cnv);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        let dx = mouse.x - cnv.width / 2;
+        let dy = mouse.y - cnv.height / 2;
+        //使用Math.atan2()方法计算出鼠标与箭头中心的夹角
+        //Math.atan2(对边,邻边)
+        angle = Math.atan2(dy, dx);
+        let vx = Math.cos(angle) * speed;
+        let vy = Math.sin(angle) * speed;
+        arrow.x += vx;
+        arrow.y += vy;
+        arrow.angle = angle;
+        //绘制箭头
+        arrow.fill(cxt);
+      })();
+    };
+  </script>
+</html>

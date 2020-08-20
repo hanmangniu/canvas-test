@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>加速度的合成和分解</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+
+      let ball = new Ball(0, cnv.height);
+      //加速度
+      const accelerated = 0.1;
+      //拆分加速度
+      let ax = accelerated * Math.cos((30 * Math.PI) / 180);
+      let ay = accelerated * Math.sin((30 * Math.PI) / 180);
+      //初始化初速度
+      let vx = 8;
+      let vy = -8;
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        ball.x += vx;
+        ball.y += vy;
+        ball.fill(cxt);
+        vx += ax;
+        vy += ay;
+      })();
+    };
+  </script>
+</html>

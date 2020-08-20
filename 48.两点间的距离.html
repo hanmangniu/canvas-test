@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>两点间的距离</title>
+    <script src="./utils/tools.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <p id="text"></p>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      let cxt = cnv.getContext("2d");
+      let text = document.getElementById("text");
+      let x = cnv.width / 2;
+      let y = cnv.height / 2;
+      //获取鼠标坐标
+      let mouse = tools.getMouse(cnv);
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        cxt.save();
+        cxt.beginPath();
+        cxt.moveTo(x, y);
+        //mouse.x表示鼠标的x轴坐标 mouse.y表示鼠标的y轴坐标
+        cxt.lineTo(mouse.x, mouse.y);
+        cxt.closePath();
+        cxt.strokeStyle = "pink";
+        cxt.stroke();
+        cxt.restore();
+
+        let dx = mouse.x - x;
+        let dy = mouse.y - y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        text.innerText = `鼠标与中点距离为:${distance}`;
+      })();
+    };
+  </script>
+</html>
