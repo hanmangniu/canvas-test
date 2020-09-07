@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>碰撞检测-外接矩形判定法</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      let ballA = new Ball(0, cnv.height / 2, 50, "pink");
+      let ballB = new Ball(cnv.width, cnv.height / 2, 50, "hotPink");
+      let vxA = 6;
+      let vxB = -10;
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        ballA.x += vxA;
+        ballB.x += vxB;
+        //碰撞检测
+        if (tools.checkCircle(ballA, ballB)) {
+          vxA = -vxA;
+          vxB = -vxB;
+        }
+        //左
+        if (ballA.x < ballA.radius) {
+          ballA.x = ballA.radius;
+          vxA *= -1;
+        }
+        //右边界
+        else if (ballB.x > cnv.width - ballB.radius) {
+          ballB.x = cnv.width - ballB.radius;
+          vxB *= -1;
+        }
+        //绘制ballA,B
+        ballA.fill(cxt);
+        ballB.fill(cxt);
+      })();
+    };
+  </script>
+</html>

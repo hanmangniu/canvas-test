@@ -61,3 +61,30 @@ window.requestAnimationFrame =
   function (callback) {
     return window.setTimeout(callback, 1000 / 60);
   };
+
+//获取随机颜色的函数
+window.tools.getRandomColor = function () {
+  return (
+    "#" +
+    (function randomColor(color) {
+      return (color += "0123456789abcdef"[Math.floor(Math.random() * 16)]) && color.length == 6 ? color : randomColor(color);
+    })("")
+  );
+};
+
+//碰撞检测-外接矩形判定法
+window.tools.checkRect = function (rectA, rectB) {
+  return !(rectA.x + rectA.width < rectB.x || rectB.x + rectB.width < rectA.x || rectA.y + rectA.height < rectB.y || rectB.y + rectB.height < rectA.y);
+};
+//碰撞检测-外接圆判定法
+window.tools.checkCircle = function (circleA, circleB) {
+  let dx = circleA.x - circleB.x;
+  let dy = circleA.y - circleB.y;
+  let distance = Math.sqrt(dx * dx + dy * dy);
+  return distance < circleA.radius + circleB.radius;
+  // if (distance < circleA.radius + circleB.radius) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+};

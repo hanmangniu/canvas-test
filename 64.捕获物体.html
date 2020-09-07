@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>捕获物体</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <p id="txt"></p>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      let txt = document.getElementById("txt");
+      const ball = new Ball(cnv.width / 2, cnv.height / 2, 80);
+      ball.fill(cxt);
+      let mouse = tools.getMouse(cnv);
+      //添加鼠标移动事件
+      cnv.addEventListener(
+        "mousemove",
+        function () {
+          //判断鼠标是否在小球内
+          if (ball.checkMouse(mouse)) {
+            txt.innerHTML = "鼠标移入小球";
+          } else {
+            txt.innerHTML = "鼠标移出小球";
+          }
+        },
+        false
+      );
+    };
+  </script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>捕获运动物体</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+    <p id="txt"></p>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      let txt = document.getElementById("txt");
+      let ball = new Ball(cnv.width / 2, cnv.height / 2, 80);
+      ball.fill(cxt);
+      let mouse = tools.getMouse(cnv);
+      let vx = 10;
+      let vy = 10;
+
+      //添加鼠标移动事件
+      cnv.addEventListener(
+        "mousedown",
+        function () {
+          //判断鼠标是否在小球内
+          if (ball.checkMouse(mouse)) {
+            alert("捕获成功");
+          }
+        },
+        false
+      );
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+        ball.x += vx;
+        ball.y += vy;
+        //左右边界
+        if (ball.x < ball.radius) {
+          ball.x = ball.radius;
+          vx = -vx;
+        } else if (ball.x > cnv.width - ball.radius) {
+          ball.x = cnv.width - ball.radius;
+          vx = -vx;
+        }
+        //上下边界
+        if (ball.y < ball.radius) {
+          ball.y = ball.radius;
+          vy = -vy;
+        } else if (ball.y > cnv.height - ball.radius) {
+          ball.y = cnv.height - ball.radius;
+          vy = -vy;
+        }
+        ball.fill(cxt);
+      })();
+    };
+  </script>
+</html>

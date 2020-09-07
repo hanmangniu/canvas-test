@@ -32,4 +32,19 @@ Ball.prototype = {
     cxt.fill();
     cxt.restore();
   },
+  getRect: function () {
+    let rect = {
+      x: this.x - this.radius,
+      y: this.y - this.radius,
+      width: this.radius * 2,
+      height: this.radius * 2,
+    };
+    return rect;
+  },
+  checkMouse: function (mouse) {
+    let dx = mouse.x - this.x;
+    let dy = mouse.y - this.y;
+    let distance = Math.sqrt(dx * dx + dy * dy);
+    return distance < this.radius;
+  },
 };

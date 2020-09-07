@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>边界生成</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+      //小球数组
+      let balls = [];
+      //小球数量
+      let n = 50;
+      //生成n个小球 随机color vx vy
+      for (let i = 0; i < n; i++) {
+        //球心坐标和 color
+        let ball = new Ball(cnv.width / 2, cnv.height / 2, 10, tools.getRandomColor());
+        //ball.vx ball.vy
+        ball.vx = Math.random() * 10 - 5;
+        ball.vy = Math.random() * 10 - 5;
+        balls.push(ball);
+      }
+      (function frame() {
+        window.requestAnimationFrame(frame);
+        cxt.clearRect(0, 0, cnv.width, cnv.height);
+
+        //遍历小球数组
+        balls.forEach(function (ball) {
+          //边界监测
+          if (ball.x < -ball.radius || ball.x > cnv.width + ball.radius || ball.y < -ball.radius || ball.y > cnv.height + ball.radius) {
+            ball.x = cnv.width / 2;
+            ball.y = cnv.height / 2;
+            ball.vx = Math.random() * 10 - 5;
+            ball.vy = Math.random() * 10 - 5;
+            ball.color = tools.getRandomColor();
+          }
+          ball.fill(cxt);
+
+          ball.x += ball.vx;
+          ball.y += ball.vy;
+        });
+      })();
+    };
+  </script>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>边界环绕</title>
+    <script src="./utils/tools.js"></script>
+    <script src="./utils/ball.js"></script>
+  </head>
+  <body>
+    <canvas id="canvas" width="1600" height="600" style="border: 1px dashed #444;"></canvas>
+  </body>
+  <script type="text/javascript">
+    window.onload = function () {
+      /** @type {HTMLCanvasElement} */
+      const cnv = document.getElementById("canvas");
+      const cxt = cnv.getContext("2d");
+
+      let ball = new Ball(20, cnv.height / 2);
+      ball.fill(cxt);
+      let key = tools.getKey();
+
+      //添加键盘事件
+      window.addEventListener(
+        "keydown",
+        function (e) {
+          cxt.clearRect(0, 0, cnv.width, cnv.height);
+          //根据按键判断物体移动方向
+          switch (key.direction) {
+            case "up":
+              ball.y -= 10;
+              checkBorder();
+              ball.fill(cxt);
+              break;
+            case "down":
+              ball.y += 10;
+              checkBorder();
+              ball.fill(cxt);
+              break;
+            case "left":
+              ball.x -= 10;
+              checkBorder();
+              ball.fill(cxt);
+              break;
+            case "right":
+              ball.x += 10;
+              checkBorder();
+              ball.fill(cxt);
+              break;
+          }
+        },
+        false
+      );
+      //边界监测函数
+      function checkBorder() {
+        //上边界
+        if (ball.y < -ball.radius) {
+          ball.y = cnv.height;
+        }
+        //下边界
+        else if (ball.y > cnv.height + ball.radius) {
+          ball.y = 0;
+        }
+        //左边界
+        else if (ball.x < -ball.radius) {
+          ball.x = cnv.width;
+        }
+        //右边界
+        else if (ball.x > cnv.width + ball.radius) {
+          ball.x = 0;
+        }
+      }
+    };
+  </script>
+</html>
